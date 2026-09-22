@@ -5,11 +5,11 @@
 const CONFIG = {
   title: "🌻 Feliz Día de las Flores Amarillas 🌻",
   message: [
-    "Cada girasol que ves aquí es un latido de mi corazón cachetes.",
-    "Así como el sol ilumina los campos, tú iluminas mi vida con tus locuras.",
-    "Que estas flores te recuerden lo especial que eres para mí.",
-    "Tal vez no pueda regalarte un ramo real por la distancia, pero te doy este con mucho cariño.",
-    "¡Te amo coshita rica!",
+    "Cada girasol que ves aquí es un latido de mi corazón.",
+    "🌻 Que estas flores iluminen tu día, así como tu amistad ilumina el mío ✨.",
+    "🌷 Unas flores amarillas para recordarte lo maravillosa que eres. Nunca dejes de sonreír 💛.",
+    "🌻 Que nunca te falten motivos para sonreír, sueños por cumplir y personas que te quieran ¡Felices flores amarillas! ✨.",
+    "¡Felices flores amarillas! 💛",
   ],
   signature: "Eres el sol que hace florecer cada uno de mis días ♡.",
   flowerCount: 280, // cantidad de girasoles en el corazón
@@ -28,9 +28,9 @@ const CONFIG = {
      En laptop/horizontal las fotos se ven juntas, lado a lado.
      En celular/vertical se turnan a pantalla completa. */
   photos: [
-    { src: "fotos/foto2.jpg", fit: "cover", pos: "88% 45%", veil: 0.4 },
-    { src: "fotos/foto1.jpg", fit: "contain", align: "right", pos: "10% 12%", veil: 0.42 },
-  ],
+    { src: "foto2.jpeg", fit: "cover", pos: "88% 45%", veil: 0.4 },
+    { src: "foto1.jpeg", fit: "contain", align: "right", pos: "10% 12%", veil: 0.42 },
+],
   photoInterval: 6000, // solo celular: milisegundos entre foto y foto
 };
 
