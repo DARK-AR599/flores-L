@@ -9,9 +9,9 @@ const CONFIG = {
     "🌻 Que estas flores iluminen tu día, así como tu amistad ilumina el mío ✨.",
     "🌷 Unas flores amarillas para recordarte lo maravillosa que eres. Nunca dejes de sonreír 💛.",
     "🌻 Que nunca te falten motivos para sonreír, sueños por cumplir y personas que te quieran ¡Felices flores amarillas! ✨.",
-    "¡Felices flores amarillas! 💛",
+    "¡🌻Nunca dejes de brillar 💛.",
   ],
-  signature: "Eres el sol que hace florecer cada uno de mis días ♡.",
+  signature: "Nunca olvides sonreír, incluso cuando el mundo parezca perder su luz ♡🌻.",
   flowerCount: 280, // cantidad de girasoles en el corazón
   trunkColor: "#0e5b57",
   groundColor: "#1b1b1b",
