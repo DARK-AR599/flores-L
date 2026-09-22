@@ -1,0 +1,316 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: #f3f3ee;
+}
+
+/* ---------- Fotos de fondo ----------
+   Laptop / horizontal: las fotos van lado a lado, cada una en su mitad.
+   Celular / vertical (.stacked): cada foto llena toda la pantalla y se turnan. */
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  overflow: hidden;
+  background: #f3f3ee;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+#bg.on {
+  opacity: 1;
+}
+
+.bg-photo {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* relleno difuminado: solo se nota si la foto no cubre todo su marco */
+.bg-photo::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: var(--img) center / cover no-repeat;
+  filter: blur(26px);
+}
+
+/* la foto en sí */
+.bg-photo .fg {
+  position: absolute;
+  inset: 0;
+  background: var(--img) var(--pos, center) / cover no-repeat;
+}
+
+/* foto completa (sin recortar) pegada a un lado; su borde se funde
+   con el fondo difuminado */
+.bg-photo .fg.contain {
+  inset: 0 auto 0 auto;
+  max-width: 100%;
+  aspect-ratio: var(--ar, 0.6);
+  background-position: center;
+}
+
+.bg-photo .fg.contain.right {
+  right: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 18%);
+  mask-image: linear-gradient(to right, transparent 0, #000 18%);
+}
+
+.bg-photo .fg.contain.left {
+  left: 0;
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 18%);
+  mask-image: linear-gradient(to left, transparent 0, #000 18%);
+}
+
+.bg-photo .fg.contain.center {
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+}
+
+/* línea fina que separa las dos fotos */
+.bg-photo + .bg-photo {
+  box-shadow: -3px 0 0 rgba(255, 251, 238, 0.95);
+}
+
+/* velo claro para que el texto y los girasoles se lean bien */
+.bg-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 251, 238, var(--veil, 0.4));
+  pointer-events: none;
+}
+
+#bg.stacked .bg-photo {
+  position: absolute;
+  inset: 0;
+  opacity: 0; /* la animación las va mostrando de a una */
+  box-shadow: none;
+}
+
+#bg.stacked .bg-photo:only-child {
+  opacity: 1;
+}
+
+/* en vertical la foto llena toda la pantalla */
+#bg.stacked .bg-photo .fg {
+  inset: 0;
+  max-width: none;
+  aspect-ratio: auto;
+  transform: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  background-position: var(--pos, center);
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Texto que se escribe ---------- */
+#text {
+  position: absolute;
+  z-index: 2;
+  color: #1c1c1c;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.95), 0 0 14px rgba(255, 255, 255, 0.8);
+}
+
+#title {
+  font-weight: 700;
+  font-size: clamp(14px, min(2.5vw, 4.2vh), 38px);
+  text-wrap: balance;
+  line-height: 1.25;
+  min-height: 1.25em;
+  margin-bottom: 0.9em;
+}
+
+#msg p {
+  font-weight: 700;
+  font-size: clamp(11px, min(1.9vw, 3.1vh), 28px);
+  line-height: 1.5;
+  margin-bottom: 0.45em;
+}
+
+#sig {
+  position: absolute;
+  z-index: 2;
+  font-family: "Dancing Script", "Brush Script MT", cursive;
+  font-size: clamp(12px, min(2vw, 3.6vh), 30px);
+  color: #222;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.95), 0 0 14px rgba(255, 255, 255, 0.8);
+}
+
+.cursor {
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Botón repetir ---------- */
+#replay {
+  position: fixed;
+  z-index: 3;
+  right: 14px;
+  bottom: 12px;
+  padding: 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #333;
+  font: 500 13px system-ui, sans-serif;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+#replay:hover,
+#replay:focus-visible {
+  opacity: 1;
+}
+
+/* =====================================================
+   PORTADA: carta con osito
+   ===================================================== */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 38%, #fffce6 0%, #fff6cc 60%, #ffefb0 100%);
+  cursor: pointer;
+  transition: opacity 0.9s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#intro.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#petals {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#envelope {
+  position: relative;
+  width: min(66vw, 320px);
+  transition: transform 0.9s cubic-bezier(0.6, 0, 0.3, 1);
+}
+
+#intro.leaving #envelope {
+  transform: scale(1.6) translateY(-18px);
+}
+
+.env-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation: float 3.2s ease-in-out infinite;
+}
+
+.bear {
+  animation: peek 3.2s ease-in-out infinite;
+}
+
+.tulips {
+  transform-origin: 150px 98px;
+  animation: wave 2.4s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes peek {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.intro-title {
+  position: relative;
+  text-align: center;
+  font-family: "Baloo 2", "Comic Sans MS", cursive, sans-serif;
+  font-weight: 800;
+  font-size: clamp(24px, 6vw, 36px);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #ffe14d;
+  -webkit-text-stroke: 6px #e8a800;
+  paint-order: stroke fill;
+}
+
+.intro-hint {
+  position: relative;
+  margin-top: 0.4rem;
+  font-family: "Baloo 2", "Comic Sans MS", cursive, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #b98a12;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+    transform: scale(0.97);
+  }
+}
+
+/* ---------- Celulares (vertical) ---------- */
+@media (orientation: portrait) {
+  #title {
+    font-size: min(5.2vw, 2.9vh);
+  }
+  #msg p {
+    font-size: min(4.3vw, 2.4vh);
+  }
+  #sig {
+    font-size: min(4.4vw, 2.5vh);
+    text-align: center;
+  }
+}

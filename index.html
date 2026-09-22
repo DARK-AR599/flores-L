@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>🌻 Para ti</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Cormorant+Garamond:wght@600;700&family=Dancing+Script:wght@500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ========== FONDO DE FOTOS ========== -->
+  <div id="bg"></div>
+
+  <!-- ========== ESCENA DEL ÁRBOL ========== -->
+  <canvas id="scene"></canvas>
+
+  <section id="text" aria-live="polite">
+    <h1 id="title"></h1>
+    <div id="msg"></div>
+  </section>
+
+  <p id="sig"></p>
+
+  <button id="replay" type="button" aria-label="Repetir animación">↻ Repetir</button>
+
+  <!-- ========== PORTADA: LA CARTA CON EL OSITO ========== -->
+  <div id="intro" role="button" tabindex="0" aria-label="Toca para abrir tu mensaje">
+    <canvas id="petals"></canvas>
+
+    <div id="envelope">
+      <svg class="env-svg" viewBox="0 0 240 230" xmlns="http://www.w3.org/2000/svg">
+        <!-- osito (detrás del sobre) -->
+        <g class="bear">
+          <circle cx="68" cy="60" r="12" fill="#f4e4d6" stroke="#e2c9b5" stroke-width="3" />
+          <circle cx="68" cy="60" r="6" fill="#f8c9c9" />
+          <circle cx="122" cy="60" r="12" fill="#f4e4d6" stroke="#e2c9b5" stroke-width="3" />
+          <circle cx="122" cy="60" r="6" fill="#f8c9c9" />
+          <circle cx="95" cy="90" r="36" fill="#f6e7da" stroke="#e2c9b5" stroke-width="3" />
+          <circle cx="83" cy="88" r="3.6" fill="#4a3b35" />
+          <circle cx="107" cy="88" r="3.6" fill="#4a3b35" />
+          <ellipse cx="74" cy="99" rx="7" ry="4.5" fill="#f9b8bd" opacity=".8" />
+          <ellipse cx="116" cy="99" rx="7" ry="4.5" fill="#f9b8bd" opacity=".8" />
+          <ellipse cx="95" cy="96" rx="4.5" ry="3.3" fill="#c98b7a" />
+          <path d="M89 102 Q95 108 101 102" fill="none" stroke="#4a3b35" stroke-width="2" stroke-linecap="round" />
+
+          <!-- bracito con tulipanes -->
+          <g class="tulips">
+            <path d="M150 96 L158 50" stroke="#6bbf59" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M152 96 L176 58" stroke="#6bbf59" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M150 96 L142 62" stroke="#6bbf59" stroke-width="3.5" stroke-linecap="round" />
+            <!-- tulipán 1 -->
+            <path d="M149 52 Q147 36 153 32 L158 40 L163 32 Q169 36 167 52 Q158 60 149 52Z"
+                  fill="#ffc933" stroke="#f0a500" stroke-width="2" stroke-linejoin="round" />
+            <!-- tulipán 2 -->
+            <path d="M168 62 Q166 47 172 43 L177 51 L182 43 Q188 47 186 62 Q177 70 168 62Z"
+                  fill="#ffd54a" stroke="#f0a500" stroke-width="2" stroke-linejoin="round" />
+            <!-- tulipán 3 -->
+            <path d="M133 66 Q131 51 137 47 L142 55 L147 47 Q153 51 151 66 Q142 74 133 66Z"
+                  fill="#ffbf1f" stroke="#f0a500" stroke-width="2" stroke-linejoin="round" />
+            <!-- moñito -->
+            <path d="M151 90 L140 84 L142 96Z M151 90 L162 84 L160 96Z" fill="#e8574d" />
+            <circle cx="151" cy="90" r="3.2" fill="#c93f36" />
+            <circle cx="150" cy="100" r="9" fill="#f6e7da" stroke="#e2c9b5" stroke-width="3" />
+          </g>
+        </g>
+
+        <!-- sobre -->
+        <rect x="30" y="112" width="180" height="108" rx="14" fill="#fde7a0" stroke="#e9c46a" stroke-width="5" />
+        <path d="M34 116 L120 176 L206 116" fill="none" stroke="#e9c46a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+        <path d="M34 216 L94 160 M206 216 L146 160" fill="none" stroke="#e9c46a" stroke-width="5" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <h2 class="intro-title">HOLA, TIENES UN<br />NUEVO MENSAJE</h2>
+    <p class="intro-hint">toca para abrir 💌</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
